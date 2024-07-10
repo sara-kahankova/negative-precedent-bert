@@ -1,20 +1,21 @@
 import json
 import os
-import pickle  # used for saving and loading Python objects to and from disk in a binary format
-import re  # regex
+import pickle
+import re
 from pathlib import Path
 
 import numpy as np
 import torch
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import (
-    MultiLabelBinarizer,  #  transforming lists of labels into binary label indicators
+    MultiLabelBinarizer,
 )
-from tqdm import tqdm  # useful for keeping track of the progress of tasks
+from tqdm import tqdm
 from transformers import BertTokenizer, AutoTokenizer
 
 
 def fix_claims(all_facts, all_claims, all_outcomes, case_id, all_arguments):
+    # define allowed articles from ECHR
     allowed = [
         "10",
         "11",
@@ -30,7 +31,7 @@ def fix_claims(all_facts, all_claims, all_outcomes, case_id, all_arguments):
         "P1-1",
         "P1-3",
         "P4-2",
-    ]  # what are these? articles?
+    ]
 
     new_claims, new_outcomes, new_ids, new_facts, new_arguments = [], [], [], [], []
     for claim, outcome, i, c_id, fact, argument in zip(
@@ -80,11 +81,11 @@ def get_arguments(data):
         The [0] index is used to select the first portion of the split text data.
         The code is extracting everything before the first occurrence of "FOR THESE REASONS, THE COURT UNANIMOUSLY"
         """
-        arguments = arguments.split("\n")  # gets list of lines
+        arguments = arguments.split("\n")
         arguments = [
             a.strip() for a in arguments
-        ]  # applies strip() to each element (a) in the list arguments
-        arguments = list(filter(None, arguments))  # filters empty values
+        ]
+        arguments = list(filter(None, arguments))
     except:
         return []
     return arguments
@@ -207,9 +208,9 @@ def get_stats(data):
     data = np.array(data)
     stats = np.array(
         [0 for i in range(len(data[0]))]
-    )  # len(data[0]) gets columns converted to a range 0..len, each set for 0
-    cnt = 0  # counter
-    for d in data:  # d represents a row in the dataset
+    )
+    cnt = 0 
+    for d in data:
         stats = stats + d
         if d.sum() > 0:
             cnt += 1
@@ -333,10 +334,10 @@ def split_dataset(
     Path(pretokenized_dir).mkdir(parents=True, exist_ok=True)
 
     # train
-    train_facts, train_masks = preprocessing_for_llama(
+    train_facts, train_masks = preprocessing(
         train_facts, tokenizer, max=max_len
     )
-    train_arguments, train_masks_arguments = preprocessing_for_llama(
+    train_arguments, train_masks_arguments = preprocessing(
         train_arguments, tokenizer, max=max_len
     )
 
@@ -358,8 +359,8 @@ def split_dataset(
 
     # validation
 
-    val_facts, val_masks = preprocessing_for_llama(val_facts, tokenizer, max=max_len)
-    val_arguments, val_masks_arguments = preprocessing_for_llama(
+    val_facts, val_masks = preprocessing(val_facts, tokenizer, max=max_len)
+    val_arguments, val_masks_arguments = preprocessing(
         val_arguments, tokenizer, max=max_len
     )
 
@@ -380,8 +381,8 @@ def split_dataset(
         )
 
     # test
-    test_facts, test_masks = preprocessing_for_llama(test_facts, tokenizer, max=max_len)
-    test_arguments, test_masks_arguments = preprocessing_for_llama(
+    test_facts, test_masks = preprocessing(test_facts, tokenizer, max=max_len)
+    test_arguments, test_masks_arguments = preprocessing(
         test_arguments, tokenizer, max=max_len
     )
 
@@ -405,7 +406,6 @@ def split_dataset(
 
 
 def binarizer(claims, outcomes, mlb, fit=False):
-    # why is it needed
     if fit:
         claims = mlb.fit_transform(claims)
         outcomes = mlb.transform(outcomes)
@@ -416,10 +416,9 @@ def binarizer(claims, outcomes, mlb, fit=False):
     return claims, outcomes
 
 
-def preprocessing_for_llama(data, tokenizer, max=512):
-    # Prepares the text data for input to llama-based models by tokenizing and encoding the text
+def preprocessing(data, tokenizer, max=512):
 
-    """Perform required preprocessing steps for pretrained llama.
+    """Perform required preprocessing steps for pretrained model.
     @param    data (np.array): Array of texts to be processed.
     @return   input_ids (torch.Tensor): Tensor of token ids to be fed to a model.
     @return   attention_masks (torch.Tensor): Tensor of indices specifying which
@@ -452,7 +451,6 @@ def preprocessing_for_llama(data, tokenizer, max=512):
             truncation=True,
         )
 
-        # Add the outputs to the lists
         input_ids.append([encoded_sent.get("input_ids")])
         attention_masks.append([encoded_sent.get("attention_mask")])
 
@@ -472,13 +470,10 @@ def text_preprocessing(text):
     @param    text (str): a string to be processed.
     @return   text (Str): the processed string.
     """
-    # Remove '@name'
     text = re.sub(r"(@.*?)[\s]", " ", text)
 
-    # Replace '&amp;' with '&'
     text = re.sub(r"&amp;", "&", text)
 
-    # Remove trailing whitespace
     text = re.sub(r"\s+", " ", text).strip()
 
     return text
@@ -506,7 +501,7 @@ def llama_preprocess():
     tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"
 
-    # Print tokenizer info for debugging
+    # Print tokenizer info
     print("Tokenizer class:", tokenizer.__class__.__name__)
     print("Tokenizer vocab size:", len(tokenizer.vocab))
     print("Tokenizer pad token:", tokenizer.pad_token)
@@ -519,4 +514,4 @@ def llama_preprocess():
 
 if __name__ == "__main__":
     llama_preprocess()
-    # bert_preprocess()
+    bert_preprocess()
