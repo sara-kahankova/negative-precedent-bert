@@ -51,13 +51,13 @@ class ReplicaClassifier(nn.Module):
         loss_outcomes[claim_labels == 0] = 0
         probability_unclaimed = (
             1 - probability_claims
-        )  # Probability of unclaimed article
+        )
         probability_claimed_accepted = (
             probability_claims * probability_outcomes
-        )  # Probability of claimed and accepted
+        )
         probability_claimed_rejected = probability_claims * (
             1 - probability_outcomes
-        )  # Probability of claimed and rejected
+        )
         final_probs = torch.stack(
             (
                 probability_unclaimed,
@@ -152,13 +152,13 @@ class BertClassifier(nn.Module):
         loss_outcomes[claim_labels == 0] = 0
         probability_unclaimed = (
             1 - probability_claims
-        )  # Probability of unclaimed article
+        )
         probability_claimed_accepted = (
             probability_claims * probability_outcomes
-        )  # Probability of claimed and accepted
+        )
         probability_claimed_rejected = probability_claims * (
             1 - probability_outcomes
-        )  # Probability of claimed and rejected
+        )
         final_probs = torch.stack(
             (
                 probability_unclaimed,
@@ -194,7 +194,7 @@ class LlamaClassifier(nn.Module):
             target_modules=[
                 "q_proj",
                 "v_proj",
-            ],  # Adjust these based on your model architecture
+            ],
         )
 
         self.llama_claim_outcome = get_peft_model(self.llama_claim_outcome, lora_config)
@@ -231,13 +231,13 @@ class LlamaClassifier(nn.Module):
         loss_outcomes[claim_labels == 0] = 0
         probability_unclaimed = (
             1 - probability_claims
-        )  # Probability of unclaimed article
+        )
         probability_claimed_accepted = (
             probability_claims * probability_outcomes
-        )  # Probability of claimed and accepted
+        )
         probability_claimed_rejected = probability_claims * (
             1 - probability_outcomes
-        )  # Probability of claimed and rejected
+        )
         final_probs = torch.stack(
             (
                 probability_unclaimed,
