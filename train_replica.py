@@ -37,7 +37,7 @@ def main():
 
     training_args = TrainingArguments(
         output_dir="./results",
-        num_train_epochs=8,
+        num_train_epochs=10,
         learning_rate=3e-5,
         per_device_train_batch_size=16,  # in Valvoda paper it is 16
         per_device_eval_batch_size=16,  # in Valvoda paper it is 16
