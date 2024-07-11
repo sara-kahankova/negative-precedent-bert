@@ -42,10 +42,10 @@ class TokenizedDataset(Dataset):
         assert not unclaimed_is_positive, "Unclaimed claim has positive outcome"
         return claim_labels + outcome_labels
 
-# Create formatted Datasets for LLaMA
-llama_train_dataset = TokenizedDataset("./ECHR/Outcome/llama/tokenized_train.pkl")
-llama_test_dataset = TokenizedDataset("./ECHR/Outcome/llama/tokenized_test.pkl")
-llama_dev_dataset = TokenizedDataset("./ECHR/Outcome/llama/tokenized_dev.pkl")
+# Create formatted Datasets for LLaMA - Uncomment for llama training
+#llama_train_dataset = TokenizedDataset("./ECHR/Outcome/llama/tokenized_train.pkl")
+#llama_test_dataset = TokenizedDataset("./ECHR/Outcome/llama/tokenized_test.pkl")
+#llama_dev_dataset = TokenizedDataset("./ECHR/Outcome/llama/tokenized_dev.pkl")
 
 # Create formatted Datasets for BERT
 bert_train_dataset = TokenizedDataset("./ECHR/Outcome/bert/tokenized_train.pkl")
