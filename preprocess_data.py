@@ -513,5 +513,5 @@ def llama_preprocess():
 
 
 if __name__ == "__main__":
-    llama_preprocess()
+    #llama_preprocess() # uncomment this to preprocess for llama (huggingface auth needed for llama access)
     bert_preprocess()
