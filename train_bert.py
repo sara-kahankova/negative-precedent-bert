@@ -1,6 +1,6 @@
 import torch
 import wandb
-from dataloader import dev_dataset, test_dataset, train_dataset
+from dataloader import bert_train_dataset, bert_test_dataset, bert_dev_dataset
 from model import BertClassifier
 from sklearn.metrics import f1_score
 from transformers import Trainer, TrainingArguments
@@ -58,13 +58,13 @@ def main():
     trainer = Trainer(
         model=model,
         args=training_args,
-        train_dataset=train_dataset,
-        eval_dataset=dev_dataset,
+        train_dataset=bert_train_dataset,
+        eval_dataset=bert_dev_dataset,
         compute_metrics=compute_metrics,
     )
 
     trainer.train()
-    eval_results = trainer.evaluate(eval_dataset=test_dataset)
+    eval_results = trainer.evaluate(eval_dataset=bert_test_dataset)
     print(f"Validation Results: {eval_results}")
 
     wandb.finish()
