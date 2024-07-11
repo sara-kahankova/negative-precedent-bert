@@ -191,10 +191,7 @@ class LlamaClassifier(nn.Module):
             lora_alpha=32,
             lora_dropout=0.1,
             bias="none",
-            target_modules=[
-                "q_proj",
-                "v_proj",
-            ],
+            target_modules=["key", "query", "value"],
         )
 
         self.llama_claim_outcome = get_peft_model(self.llama_claim_outcome, lora_config)
