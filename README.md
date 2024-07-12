@@ -31,7 +31,7 @@ If you are operating from the command line, you might need to install gdown and 
 
 ```bash
 pip install gdown
-gdown https://drive.google.com/uc?id=1znbSf0vLJD-CxqpyzslxFw-vEe4qXOxw
+gdown id=1znbSf0vLJD-CxqpyzslxFw-vEe4qXOxw
 unzip outcome_corpus.zip -d ECHR/Outcome
 ```
 ### Step 4: Preprocess the Data
