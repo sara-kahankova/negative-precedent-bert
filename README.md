@@ -1,6 +1,10 @@
-# Research Project: Setting Up the ECHR Outcome Corpus
+# Thesis Project: Negative Precedent Prediction
 
-Welcome to the repository for the ECHR Outcome Corpus research project. This guide will walk you through the steps needed to set up the code and start working with the dataset.
+Welcome to the repository for the Negative Precedent Prediction research project. 
+
+## Introduction of the project
+
+This project explores the use of Large Language Models ("LLMs") for predicting legal outcomes, focusing on cases from the European Court of Human Rights. Building on previous work by Valvoda et al. (2023), the study aims to improve the accuracy of negative precedent prediction, which has lagged behind positive precedent prediction. The research employs various LLM architectures, including BERT and Llama 3, to investigate whether increasing model size can enhance prediction performance.
 
 ## Get Started
 
@@ -58,3 +62,7 @@ or
 ``` bash
 python train_llama.py
 ```
+
+## Conclusion of the project
+
+The study found that while larger models like Llama 3 showed modest improvements in negative precedent prediction, the gains were less significant than anticipated. This suggests that simply increasing model size may not be sufficient to bridge the gap between positive and negative precedent prediction in legal contexts. Furthermore, the MonoBERT experiment demonstrated that a simplified architecture could achieve comparable results to the original parallel BERT implementation, with only a slight decrease in the F1 score for negative prediction. The research highlights the complexity of legal prediction tasks and the need for further investigation into factors such as dataset quality, task formulation, and the inherent capabilities of LLMs in legal reasoning.
