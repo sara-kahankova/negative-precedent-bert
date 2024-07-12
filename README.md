@@ -21,7 +21,7 @@ Create a new directory named ECHR and copy the Outcome corpus files into a sub-d
 mkdir -p ECHR/Outcome
 ```
 
-###Step 3: Download the Dataset
+### Step 3: Download the Dataset
 
 Navigate to the ECHR/Outcome directory and download the Outcome corpus dataset using the link provided:
 
