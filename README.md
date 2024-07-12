@@ -71,7 +71,7 @@ The study found that while larger models like Llama 3 showed modest improvements
 <br> MonoBERT ~ glorious-fog
 <br> BERT Replica ~ lucky-leaf
 
-<img width="475" alt="image" src="https://github.com/user-attachments/assets/173697e2-4ddf-4948-a75b-5e5fa1f9c95e">
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/173697e2-4ddf-4948-a75b-5e5fa1f9c95e">
 
 <br>
 See full results on Weights and Biases:
