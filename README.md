@@ -67,9 +67,9 @@ python train_llama.py
 
 The study found that while larger models like Llama 3 showed modest improvements in negative precedent prediction, the gains were less significant than anticipated. This suggests that simply increasing model size may not be sufficient to bridge the gap between positive and negative precedent prediction in legal contexts. Furthermore, the MonoBERT experiment demonstrated that a simplified architecture could achieve comparable results to the original parallel BERT implementation, with only a slight decrease in the F1 score for negative prediction. The research highlights the complexity of legal prediction tasks and the need for further investigation into factors such as dataset quality, task formulation, and the inherent capabilities of LLMs in legal reasoning.
 
-MonoLlama ~ copper-cloud
-MonoBERT ~ glorious-fog
-BERT Replica ~ lucky-leaf
+<br> MonoLlama ~ copper-cloud 
+<br> MonoBERT ~ glorious-fog
+<br> BERT Replica ~ lucky-leaf
 
 <img width="475" alt="image" src="https://github.com/user-attachments/assets/173697e2-4ddf-4948-a75b-5e5fa1f9c95e">
 
