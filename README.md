@@ -74,4 +74,4 @@ The study found that while larger models like Llama 3 showed modest improvements
 <img width="475" alt="image" src="https://github.com/user-attachments/assets/173697e2-4ddf-4948-a75b-5e5fa1f9c95e">
 
 <br>
-See full results on wandb [![Weights & Biases](https://wandb.ai/logo.png)](https://api.wandb.ai/links/kahinek1999/um4r3w2j)
+See full results on wandb <a href="https://api.wandb.ai/links/kahinek1999/um4r3w2j" target="_blank"><img src="https://wandb.ai/logo.png" alt="Wandb logo" width="200px"></a>
