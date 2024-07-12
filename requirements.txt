@@ -4,3 +4,4 @@ transformers
 wandb
 scikit-learn
 huggingface-hub
+peft
