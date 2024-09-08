@@ -187,11 +187,20 @@ class LlamaClassifier(nn.Module):
 
         lora_config = LoraConfig(
             task_type=TaskType.SEQ_CLS,
-            r=8,
-            lora_alpha=32,
-            lora_dropout=0.1,
+            r=256,
+            lora_alpha=512,
+            lora_dropout=0.05,
             bias="none",
-            target_modules=["key", "query", "value"],
+            target_modules=[
+                "query",
+                "key",
+                "value",
+                "dense",
+                "intermediate.dense",
+                "output.dense",
+                "attention.output.dense",
+                "pooler.dense",
+            ],
         )
 
         self.llama_claim_outcome = get_peft_model(self.llama_claim_outcome, lora_config)
