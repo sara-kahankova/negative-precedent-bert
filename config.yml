@@ -1,0 +1,38 @@
+program: train.py
+method: bayes
+metric:
+  name: eval/f1_negative
+  goal: maximize
+parameters:
+  learning_rate:
+    min: 1e-5
+    max: 1e-3
+    distribution: log_uniform
+  num_train_epochs:
+    values: [2, 3, 4, 5]
+  per_device_train_batch_size:
+    values: [1]
+  gradient_accumulation_steps:
+    values: [8, 16, 32]
+  warmup_ratio:
+    min: 0.0
+    max: 0.2
+    distribution: uniform
+  weight_decay:
+    min: 0.0
+    max: 0.2
+    distribution: uniform
+  lora_r:
+    values: [16, 32, 64, 128, 256, 512]
+  lora_alpha:
+    values: [32, 64, 128, 256, 512, 1028]
+  lora_dropout:
+    min: 0.0
+    max: 0.5
+    distribution: uniform
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args}
